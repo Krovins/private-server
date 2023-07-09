@@ -1377,15 +1377,9 @@ export default class Game {
                 break;
 
             case PacketType.BUY_AND_EQUIP:
-                // const isAcc: boolean = packet.data[2];
-                // const isHat: boolean = true;
-
-                // 
-
-
-
-
-/*                const isAccessory: boolean = !!packet.data[2];
+                const isAcc: boolean = packet.data[2];
+                const isHat: boolean = true;
+                const isAccessory: boolean = !!packet.data[2];
                 const equipID: number = packet.data[1];
                 const shouldPurchase: boolean = !!packet.data[0];
                 const equipPrice: number = isAccessory ? (getAcc(equipID)?.price || 0) : (getHat(equipID)?.price || 0);
@@ -1436,14 +1430,9 @@ export default class Game {
                             }
                         }
                     }
-                }*/
-
-                // 
+                } 
 
                 if (packet.data[0]) {
-
-
-
                     if (client.player) {
                         if (packet.data[0]) {
                             if (isHat) {
@@ -1472,7 +1461,7 @@ export default class Game {
                                         client.player.points -= accPrice;
                                         client.ownedAccs.push(packet.data[1]);
                                         client.socket.send(
-                                            PacketFactory.serializePacket(
+                                            packetFactory.serializePacket(
                                                 new Packet(PacketType.UPDATE_STORE, [
                                                     0,
                                                     packet.data[1],
@@ -1493,14 +1482,14 @@ export default class Game {
                                     if (client.player.hatID === packet.data[1]) {
                                         client.player.hatID = 0;
                                         client.socket.send(
-                                            PacketFactory.serializePacket(
+                                            packetFactory.serializePacket(
                                                 new Packet(PacketType.UPDATE_STORE, [1, 0, isAcc])
                                             )
                                         );
                                     } else {
                                         client.player.hatID = packet.data[1];
                                         client.socket.send(
-                                            PacketFactory.serializePacket(
+                                            packetFactory.serializePacket(
                                                 new Packet(PacketType.UPDATE_STORE, [
                                                     1,
                                                     packet.data[1],
@@ -1519,14 +1508,14 @@ export default class Game {
                                     if (client.player.accID === packet.data[1]) {
                                         client.player.accID = 0;
                                         client.socket.send(
-                                            PacketFactory.serializePacket(
+                                            packetFactory.serializePacket(
                                                 new Packet(PacketType.UPDATE_STORE, [1, 0, isAcc])
                                             )
                                         );
                                     } else {
                                         client.player.accID = packet.data[1];
                                         client.socket.send(
-                                            PacketFactory.serializePacket(
+                                            packetFactory.serializePacket(
                                                 new Packet(PacketType.UPDATE_STORE, [
                                                     1,
                                                     packet.data[1],
